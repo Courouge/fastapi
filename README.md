@@ -1,17 +1,13 @@
+# Quickstart Fastapi
 
-docker rm $(docker stop $(docker ps -a -q --filter name="myfastcontainer" --format="{{.ID}}"))
+## Build container
+docker build -t small_fast_api . 
 
-docker build -t myfastapi:"$(<.version)" . && docker run -d --name myfastcontainer -p 80:80  myfastapi:"$(<.version)"
+## Run container
+docker run -p 80:80 -it small_fast_api
 
-docker-compose exec web pytest .
+## delete container
+docker kill $(docker ps -a -q)
 
-
-## fast way ##
-## delete and recreate
-docker rm $(docker stop $(docker ps -a -q --filter name="myfastcontainer" --format="{{.ID}}")) && docker build -t myfastapi:"$(<.version)" . && docker run -d --name myfastcontainer -p 80:80  myfastapi:"$(<.version)"
-
-## build and test
-docker-compose up -d --build && docker-compose exec web pytest .
-
-## connect to container
-docker-compose exec web sh
+## in one line
+docker kill $(docker ps -a -q) && docker build -t small_fast_api . && docker run -p 80:80 -it small_fast_api
