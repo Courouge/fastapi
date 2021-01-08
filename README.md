@@ -1,4 +1,4 @@
-# Quickstart Fastapi
+# Quickstart Fastapi (245 MB)
 
 ## Build container
 docker build -t small_fast_api . 
