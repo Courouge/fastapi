@@ -9,3 +9,7 @@ passlib
 bcrypt
 pydantic
 odmantic
+typing_extensions
+beautifulsoup4
+requests
+lxml
