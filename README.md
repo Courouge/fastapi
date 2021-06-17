@@ -7,7 +7,6 @@ In my case, I try to find the smallest docker image :)
 `./compare.sh`
 
 fastapi_sl_tiangolo_slim       latest    7691581e0550   1 second ago         125MB
-
 fastapi_sl_tiangolo_alpine     latest    0d03fc853983   45 seconds ago       22.4MB
 
 fastapi_sl_slim_distroless     latest    2d6813ba6e41   About a minute ago   25MB
