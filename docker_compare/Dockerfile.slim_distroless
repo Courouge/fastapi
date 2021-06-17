@@ -1,0 +1,10 @@
+FROM python:3-slim AS build-env
+COPY app /app
+COPY requirements.txt requirements.txt
+RUN pip3 install --no-cache-dir --disable-pip-version-check -r requirements.txt -t /app
+
+FROM gcr.io/distroless/python3-debian10
+COPY --from=build-env /app /app
+WORKDIR /app
+EXPOSE 8000
+CMD ["main.py"]
