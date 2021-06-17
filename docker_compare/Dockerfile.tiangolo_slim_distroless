@@ -1,0 +1,17 @@
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8000
+COPY /app /app
+
+
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim AS build-env
+COPY app /app
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt -t /app
+
+FROM gcr.io/distroless/python3-debian10
+COPY --from=build-env /app /app
+WORKDIR /app
+EXPOSE 8000
+CMD ["main.py"]
