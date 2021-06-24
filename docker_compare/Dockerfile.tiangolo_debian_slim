@@ -1,0 +1,12 @@
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# We clean up a lot of space by deleting rogue .c files etc:
+RUN find /usr/local/lib/python3.8 -name '*.c' -delete
+RUN find /usr/local/lib/python3.8 -name '*.pxd' -delete
+RUN find /usr/local/lib/python3.8 -name '*.pyd' -delete
+# Cleaning up __pycache__ gains more space
+RUN find /usr/local/lib/python3.8 -name '__pycache__' | xargs rm -r
+EXPOSE 8000
+COPY /app /app

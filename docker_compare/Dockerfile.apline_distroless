@@ -1,6 +1,7 @@
 FROM python:3-alpine AS build-env
 COPY app /app
 COPY requirements.txt /app
+RUN apk add build-base
 WORKDIR /app
 RUN pip3 install --no-cache-dir -r requirements.txt -t /app
 
